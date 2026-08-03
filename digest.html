@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新闻速览</title>
+  <link rel="stylesheet" href="digest.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>新闻速览</h1>
+    <button id="openSettingsBtn" class="icon-btn" title="设置" aria-label="设置">⚙</button>
+  </header>
+
+  <main class="container">
+    <section class="sources-section">
+      <p class="section-label">新闻源（点击跳转）</p>
+      <div id="sourceButtons" class="source-list"></div>
+    </section>
+
+    <section class="action-section">
+      <button id="summarizeBtn" class="summarize-btn">一键总结热点新闻</button>
+      <div id="statusArea" class="status-area"></div>
+    </section>
+
+    <section class="results-section">
+      <div id="results" class="results">
+        <p class="placeholder" id="resultsPlaceholder">
+          配置好 AI 接口后，点击上方“一键总结热点新闻”开始。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    插件将从上方新闻源首页抓取文章链接，交由你配置的 AI 挑选热点并生成摘要。
+  </footer>
+
+  <div id="settingsDrawer" class="drawer-overlay hidden">
+    <div class="drawer" role="dialog" aria-label="设置">
+      <header class="drawer-header">
+        <h2>设置</h2>
+        <button id="closeSettingsBtn" class="icon-btn" title="关闭" aria-label="关闭">×</button>
+      </header>
+
+      <div class="drawer-body">
+        <section class="field-group">
+          <h3>AI 接口（OpenAI 兼容协议）</h3>
+          <label>
+            API Key
+            <input type="password" id="apiKeyInput" placeholder="sk-..." autocomplete="off">
+          </label>
+          <label>
+            Base URL
+            <input type="url" id="baseUrlInput" placeholder="https://api.openai.com/v1">
+          </label>
+          <label>
+            模型名
+            <input type="text" id="modelInput" placeholder="gpt-4o-mini">
+          </label>
+          <label>
+            总结条数 X（1–30）
+            <input type="number" id="countInput" min="1" max="30" step="1">
+          </label>
+          <p class="hint">
+            支持任意 OpenAI 兼容接口：OpenAI、DeepSeek、Kimi、通义、豆包、GLM、Ollama 等。
+          </p>
+        </section>
+
+        <section class="field-group">
+          <h3>新闻源</h3>
+          <div id="sourceRows"></div>
+          <button id="addSourceBtn" class="secondary-btn">+ 添加新闻源</button>
+          <p class="hint">
+            自定义来源在首次一键总结时会请求浏览器授权，授权后才能抓取该网站内容。
+          </p>
+        </section>
+
+        <section class="field-group">
+          <h3>悬浮球</h3>
+          <button id="resetFloatBtn" class="secondary-btn">重置到默认位置</button>
+          <p class="hint">悬浮球可在所有网页右侧按住上下拖动，位置自动保存。</p>
+        </section>
+      </div>
+
+      <footer class="drawer-footer">
+        <button id="saveSettingsBtn" class="primary-btn">保存设置</button>
+        <span id="settingsToast" class="toast"></span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="digest.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "新闻速览",
+  "version": "1.0.0",
+  "description": "一键聚合多家权威新闻源，AI 总结热点新闻。",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "打开新闻速览"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "http://www.xinhuanet.com/*",
+    "https://www.xinhuanet.com/*",
+    "http://www.people.com.cn/*",
+    "https://www.people.com.cn/*",
+    "http://news.cctv.com/*",
+    "https://news.cctv.com/*",
+    "http://www.gov.cn/*",
+    "https://www.gov.cn/*",
+    "http://www.gmw.cn/*",
+    "https://www.gmw.cn/*",
+    "http://www.thepaper.cn/*",
+    "https://www.thepaper.cn/*",
+    "http://www.huanqiu.com/*",
+    "https://www.huanqiu.com/*"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/float-ball.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
