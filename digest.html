@@ -19,7 +19,15 @@
     </section>
 
     <section class="action-section">
-      <button id="summarizeBtn" class="summarize-btn">一键总结热点新闻</button>
+      <div class="action-toolbar">
+        <button id="summarizeBtn" class="summarize-btn">
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="btn-label">一键总结热点新闻</span>
+          <span class="countdown" id="summarizeCountdown"></span>
+        </button>
+        <button id="forceRefreshBtn" class="secondary-btn force-refresh-btn"
+          title="忽略 10 分钟缓存，重新抓取所有新闻源与百度热榜">强制刷新</button>
+      </div>
       <div id="statusArea" class="status-area"></div>
     </section>
 
@@ -33,7 +41,7 @@
   </main>
 
   <footer class="footer">
-    插件将从上方新闻源首页抓取文章链接，交由你配置的 AI 挑选热点并生成摘要。
+    插件将从上方新闻源首页抓取文章链接，结合百度实时热搜排序，由你配置的 AI 生成摘要。
   </footer>
 
   <div id="settingsDrawer" class="drawer-overlay hidden">
@@ -64,6 +72,34 @@
           </label>
           <p class="hint">
             支持任意 OpenAI 兼容接口：OpenAI、DeepSeek、Kimi、通义、豆包、GLM、Ollama 等。
+          </p>
+        </section>
+
+        <section class="field-group">
+          <h3>时间范围（可选）</h3>
+          <label>
+            预设
+            <select id="datePresetSelect">
+              <option value="all">全部时间</option>
+              <option value="today">今天</option>
+              <option value="week">近7天</option>
+              <option value="month">近30天</option>
+              <option value="year">近一年</option>
+              <option value="custom">自定义</option>
+            </select>
+          </label>
+          <div class="date-range-row">
+            <label>
+              开始日期
+              <input type="date" id="dateStartInput">
+            </label>
+            <label>
+              截止日期
+              <input type="date" id="dateEndInput">
+            </label>
+          </div>
+          <p class="hint">
+            选择范围后，一键总结时自动过滤该时段之外的新闻；无法识别发布时间的文章会排在末尾。预设按当天计算。
           </p>
         </section>
 
